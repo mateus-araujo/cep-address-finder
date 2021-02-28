@@ -1,0 +1,20 @@
+{
+  "name": "cep-address-finder",
+  "version": "1.0.0",
+  "description": "Cep address finder",
+  "main": "index.js",
+  "keywords": [
+    "cep",
+    "zipcode",
+    "endereço",
+    "endereco",
+    "address",
+    "brasil",
+    "brazil"
+  ],
+  "author": "Mateus Araujo",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
