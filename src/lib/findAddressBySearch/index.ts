@@ -1,5 +1,5 @@
-const getAddressesBySearch = require('./getAddressesBySearch')
-const selectAddressFromList = require('./selectAddressFromList')
+import getAddressesBySearch from './getAddressesBySearch'
+import selectAddressFromList from './selectAddressFromList'
 
 /**
  * Retorna Promise com a lista de endereços a partir da pesquisa e
@@ -12,7 +12,14 @@ const selectAddressFromList = require('./selectAddressFromList')
  * @param {number} address.number - Número. Por exemplo: 987.
  * @param {string} address.neighborhood - Bairro. Por exemplo: 'Meireles'.
  */
-async function findAddressBySearch({ uf, city, street, number, neighborhood }) {
+async function findAddressBySearch(
+    { uf, city, street, number, neighborhood }: {
+        uf: string
+        city: string
+        street: string
+        number: string
+        neighborhood: string
+    }) {
     try {
         const data = await getAddressesBySearch(uf, city, street)
 
@@ -21,12 +28,17 @@ async function findAddressBySearch({ uf, city, street, number, neighborhood }) {
         }
 
         const addressesList = data
-        const { addresses, selectedAddress } = selectAddressFromList(addressesList, number, neighborhood, city)
+        const result = selectAddressFromList(addressesList, number, neighborhood, city)
 
-        return { addresses, selectedAddress }
+        if (result) {
+            const { addresses, selectedAddress } = result
+
+            return { addresses, selectedAddress }
+        }
+
     } catch (error) {
         return error
     }
 }
 
-module.exports = findAddressBySearch
+export default findAddressBySearch

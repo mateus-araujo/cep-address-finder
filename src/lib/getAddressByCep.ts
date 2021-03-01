@@ -1,11 +1,9 @@
-const fetch = require('node-fetch')
-
 /**
  * Retorna endereço a partir do CEP
  *
  * @param {string} cep - CEP: Por exemplo: '60160-110' ou '60160110'
  */
-async function getAddressByCEP(cep) {
+async function getAddressByCEP(cep: string) {
     try {
         const response = await fetch(
             `https://viacep.com.br/ws/${cep}/json`
@@ -21,4 +19,4 @@ async function getAddressByCEP(cep) {
     }
 }
 
-module.exports = getAddressByCEP
+export default getAddressByCEP

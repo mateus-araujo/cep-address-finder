@@ -1,5 +1,3 @@
-const fetch = require('node-fetch')
-
 /**
  * Retorna lista de endereços a partir da pesquisa
  *
@@ -7,7 +5,7 @@ const fetch = require('node-fetch')
  * @param {string} city - (Obrigatório) Cidade. Por exemplo: 'Fortaleza'.
  * @param {string} street - (Obrigatório) Logradouro. Por exemplo: 'Rua Ana Bilhar'.
  */
-async function getAddressesBySearch(uf, city, street) {
+async function getAddressesBySearch(uf: string, city: string, street: string) {
     try {
         const response = await fetch(
             `https://viacep.com.br/ws/${uf}/${city}/${
@@ -22,10 +20,11 @@ async function getAddressesBySearch(uf, city, street) {
 
         return data
     } catch (error) {
+        console.log({ uf, city, street, error })
         return {
             message: 'Erro na requisição ao ViaCEP'
         }
     }
 }
 
-module.exports = getAddressesBySearch
+export default getAddressesBySearch

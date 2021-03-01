@@ -1,6 +1,7 @@
-const isNumberAtComplementPattern = require('./isNumberAtComplementPattern')
+import { Address } from '../../../types'
+import isNumberAtComplementPattern from './isNumberAtComplementPattern'
 
-function findByNeighborhoodOrCity(addresses, neighborhood, city) {
+function findByNeighborhoodOrCity(addresses: Address[], neighborhood: string, city: string) {
     return neighborhood ? (
         addresses.find(address => address.bairro === neighborhood) ||
         addresses.find(address => address.bairro.includes(neighborhood))
@@ -10,7 +11,10 @@ function findByNeighborhoodOrCity(addresses, neighborhood, city) {
     ) : undefined
 }
 
-function selectAddressFromList(addresses, number, neighborhood, city) {
+function selectAddressFromList(addresses: Address[], number: string, neighborhood: string, city: string): {
+    addresses: Address[]
+    selectedAddress: Address | undefined
+} | undefined {
     try {
         const selectedAddress = number
             /**
@@ -29,14 +33,14 @@ function selectAddressFromList(addresses, number, neighborhood, city) {
                         ? addresses
                             .filter(address => address.complemento.includes('par'))
                             // Pesquisa por padrões no complemento
-                            .find(address => isNumberAtComplementPattern(address.complemento, number))
+                            .find(address => isNumberAtComplementPattern(address.complemento, Number(number)))
                         // Se o número não é par, pesquisa apenas pelos complementos que possuem a palavra "ímpar"
                         : addresses
                             .filter(address => address.complemento.includes('ímpar'))
                             // Pesquisa por padrões no complemento
-                            .find(address => isNumberAtComplementPattern(address.complemento, number))
+                            .find(address => isNumberAtComplementPattern(address.complemento, Number(number)))
                     // Não havendo nenhuma referência a lado, realiza pesquisa geral pelos padrões
-                    : addresses.find(address => isNumberAtComplementPattern(address.complemento, number)) ||
+                    : addresses.find(address => isNumberAtComplementPattern(address.complemento, Number(number))) ||
                         // Não encontrado nada nos últimos passos, pesquisa-se apenas pelo bairro ou cidade
                         findByNeighborhoodOrCity(addresses, neighborhood, city)
             // Sem número definido, pesquisa-se apenas pelo bairro ou cidade
@@ -48,4 +52,4 @@ function selectAddressFromList(addresses, number, neighborhood, city) {
     }
 }
 
-module.exports = selectAddressFromList
+export default selectAddressFromList

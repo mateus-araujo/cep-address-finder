@@ -1,6 +1,6 @@
 const nonDigits = /\D/g
 
-function isNumberAtComplementPattern(complemento, number) {
+function isNumberAtComplementPattern(complemento: string, number: number) {
     if (complemento.match(/até \d*\/\d*/g)) {
         const [, max] = complemento.replace('até ', '').split('/')
 
@@ -54,4 +54,4 @@ function isNumberAtComplementPattern(complemento, number) {
     return false
 }
 
-module.exports = isNumberAtComplementPattern
+export default isNumberAtComplementPattern
