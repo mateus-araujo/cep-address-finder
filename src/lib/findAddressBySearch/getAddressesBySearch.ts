@@ -6,6 +6,10 @@
  * @param {string} street - (Obrigatório) Logradouro. Por exemplo: 'Rua Ana Bilhar'.
  */
 async function getAddressesBySearch(uf: string, city: string, street?: string) {
+    if (street && street?.length > 0 && street?.length < 3) {
+        throw new Error('street deve conter pelo menos 3 caracteres.')
+    }
+
     try {
         const response = await fetch(
             `https://viacep.com.br/ws/${uf}/${city}/${
@@ -20,9 +24,7 @@ async function getAddressesBySearch(uf: string, city: string, street?: string) {
 
         return data
     } catch (error) {
-        return {
-            message: 'Erro na requisição ao ViaCEP'
-        }
+        throw new Error('Erro na requisição ao ViaCEP')
     }
 }
 

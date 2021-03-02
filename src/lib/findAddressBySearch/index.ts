@@ -38,7 +38,7 @@ async function findAddressBySearch(
 
         return { addresses, selectedAddress }
     } catch (error) {
-        return error
+        throw error
     }
 }
 
