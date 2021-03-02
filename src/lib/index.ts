@@ -1,7 +1,7 @@
 import findAddressBySearch from './findAddressBySearch'
-import getAddressByCep from './getAddressByCep'
+import getAddressByCEP from './getAddressByCEP'
 
 export {
     findAddressBySearch,
-    getAddressByCep,
+    getAddressByCEP,
 }
