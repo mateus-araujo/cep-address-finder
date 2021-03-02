@@ -5,7 +5,7 @@
  * @param {string} city - (Obrigatório) Cidade. Por exemplo: 'Fortaleza'.
  * @param {string} street - (Obrigatório) Logradouro. Por exemplo: 'Rua Ana Bilhar'.
  */
-async function getAddressesBySearch(uf: string, city: string, street: string) {
+async function getAddressesBySearch(uf: string, city: string, street?: string) {
     try {
         const response = await fetch(
             `https://viacep.com.br/ws/${uf}/${city}/${
@@ -20,7 +20,6 @@ async function getAddressesBySearch(uf: string, city: string, street: string) {
 
         return data
     } catch (error) {
-        console.log({ uf, city, street, error })
         return {
             message: 'Erro na requisição ao ViaCEP'
         }

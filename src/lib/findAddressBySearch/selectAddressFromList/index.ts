@@ -1,7 +1,7 @@
 import { Address } from '../../../types'
 import isNumberAtComplementPattern from './isNumberAtComplementPattern'
 
-function findByNeighborhoodOrCity(addresses: Address[], neighborhood: string, city: string) {
+function findByNeighborhoodOrCity(addresses: Address[], neighborhood?: string, city?: string) {
     return neighborhood ? (
         addresses.find(address => address.bairro === neighborhood) ||
         addresses.find(address => address.bairro.includes(neighborhood))
@@ -11,7 +11,7 @@ function findByNeighborhoodOrCity(addresses: Address[], neighborhood: string, ci
     ) : undefined
 }
 
-function selectAddressFromList(addresses: Address[], number: string, neighborhood: string, city: string): {
+function selectAddressFromList(addresses: Address[], number?: string, neighborhood?: string, city?: string): {
     addresses: Address[]
     selectedAddress: Address | undefined
 } | undefined {

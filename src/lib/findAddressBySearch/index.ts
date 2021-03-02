@@ -16,9 +16,9 @@ async function findAddressBySearch(
     { uf, city, street, number, neighborhood }: {
         uf: string
         city: string
-        street: string
-        number: string
-        neighborhood: string
+        street?: string
+        number?: string
+        neighborhood?: string
     }) {
     try {
         const data = await getAddressesBySearch(uf, city, street)
@@ -30,12 +30,13 @@ async function findAddressBySearch(
         const addressesList = data
         const result = selectAddressFromList(addressesList, number, neighborhood, city)
 
-        if (result) {
-            const { addresses, selectedAddress } = result
-
-            return { addresses, selectedAddress }
+        if (!result) {
+            return { addresses: [], selectedAddress: undefined }
         }
 
+        const { addresses, selectedAddress } = result
+
+        return { addresses, selectedAddress }
     } catch (error) {
         return error
     }
