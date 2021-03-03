@@ -1,10 +1,10 @@
 {
   "name": "cep-address-finder",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Cep address finder",
   "main": "dist/main.js",
   "scripts": {
-    "clean": "rm -rf lib",
+    "clean": "rm -rf dist",
     "build-package": "rollup --config",
     "build": "yarn build-package"
   },
