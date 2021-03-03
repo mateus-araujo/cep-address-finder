@@ -1,5 +1,18 @@
 export interface Address {
     cep: string,
+    street: string,
+    complement: string,
+    neighborhood: string,
+    city: string,
+    state: string,
+    ibge?: string,
+    gia?: string,
+    ddd?: string,
+    siafi?: string,
+}
+
+export interface ViaCEPAddress {
+    cep: string,
     logradouro: string,
     complemento: string,
     bairro: string,
@@ -10,3 +23,4 @@ export interface Address {
     ddd: string,
     siafi: string,
 }
+

@@ -1,13 +1,13 @@
-import { Address } from '../../../types'
+import { Address } from 'types'
 import isNumberAtComplementPattern from './isNumberAtComplementPattern'
 
 function findAddressByNeighborhoodOrCity(addresses: Address[], neighborhood?: string, city?: string) {
     return neighborhood ? (
-        addresses.find(address => address.bairro === neighborhood) ||
-        addresses.find(address => address.bairro.includes(neighborhood))
+        addresses.find(address => address.neighborhood === neighborhood) ||
+        addresses.find(address => address.neighborhood.includes(neighborhood))
     ) : city ? (
-        addresses.find(address => address.localidade === city) ||
-        addresses.find(address => address.localidade.includes(city))
+        addresses.find(address => address.city === city) ||
+        addresses.find(address => address.city.includes(city))
     ) : undefined
 }
 
@@ -17,37 +17,37 @@ function selectAddressFromList(addresses: Address[], number?: string, neighborho
 } | undefined {
     try {
         const addressesList = neighborhood
-            ? addresses.filter(address => address.bairro === neighborhood || address.bairro.includes(neighborhood))
+            ? addresses.filter(address => address.neighborhood === neighborhood || address.neighborhood.includes(neighborhood))
             : addresses
 
         const selectedAddress = number
             /**
              * Havendo número definido, pesquisa-se pelo número no logradouro.
-             * Por exemplo: { "logradouro": "Rua Osvaldo Cruz 2321" }
+             * Por exemplo: { "street": "Rua Osvaldo Cruz 2321" }
              */
-            ? addressesList.some(address => address.logradouro.includes(number))
-                ? addressesList.find(address => address.logradouro.includes(number))
+            ? addressesList.some(address => address.street.includes(number))
+                ? addressesList.find(address => address.street.includes(number))
                 /**
                  * Pesquisa se existe alguma referência a "lado" na listagem
-                 * Por exemplo: { "complemento": "até 989 - lado ímpar" }
+                 * Por exemplo: { "complement": "até 989 - lado ímpar" }
                  */
-                : addressesList.some(address => address.complemento.includes('lado'))
+                : addressesList.some(address => address.complement.includes('lado'))
                     // Verifica se o número é par ou ímpar
                     ? (Number(number) % 2  === 0)
                         // Se o número é par, pesquisa apenas pelos complementos que possuem a palavra "par"
                         ? addressesList
-                            .filter(address => address.complemento.includes('par'))
+                            .filter(address => address.complement.includes('lado par'))
                             // Pesquisa por padrões no complemento
-                            .find(address => isNumberAtComplementPattern(address.complemento, Number(number)))
+                            .find(address => isNumberAtComplementPattern(address.complement, Number(number)))
                         // Se o número não é par, pesquisa apenas pelos complementos que possuem a palavra "ímpar"
                         : addressesList
-                            .filter(address => address.complemento.includes('ímpar'))
+                            .filter(address => address.complement.includes('lado ímpar'))
                             // Pesquisa por padrões no complemento
-                            .find(address => isNumberAtComplementPattern(address.complemento, Number(number)))
+                            .find(address => isNumberAtComplementPattern(address.complement, Number(number)))
                     // Não havendo nenhuma referência a lado, verifica se algum complemento se encaixa em algum padrão
-                    : addressesList.some(address => isNumberAtComplementPattern(address.complemento, Number(number)))
+                    : addressesList.some(address => isNumberAtComplementPattern(address.complement, Number(number)))
                         // Havendo algum complemento em algum padrão, procura e retorna o endereço que se encaixa no padrão
-                        ? addressesList.find(address => isNumberAtComplementPattern(address.complemento, Number(number)))
+                        ? addressesList.find(address => isNumberAtComplementPattern(address.complement, Number(number)))
                         // Não encontrado nada nos últimos passos, pesquisa-se apenas pelo bairro ou cidade
                         : findAddressByNeighborhoodOrCity(addresses, neighborhood, city)
             // Sem número definido, pesquisa-se apenas pelo bairro ou cidade

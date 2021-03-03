@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+      "baseUrl": "./src",
       "allowSyntheticDefaultImports": true,
       "declaration": true,
       "forceConsistentCasingInFileNames": true,

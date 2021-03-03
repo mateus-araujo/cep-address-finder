@@ -1,3 +1,5 @@
+import { convertViaCEPAddress } from "lib/helpers"
+
 /**
  * Retorna endereço a partir do CEP
  *
@@ -21,7 +23,7 @@ async function getAddressByCEP(cep: string) {
             throw data
         }
 
-        return data
+        return convertViaCEPAddress(data)
     } catch (error) {
         if (error?.erro === true) {
             throw new Error('CEP não encontrado')
