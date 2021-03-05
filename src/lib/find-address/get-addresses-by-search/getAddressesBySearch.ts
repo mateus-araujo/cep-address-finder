@@ -18,8 +18,8 @@ async function getAddressesBySearch(state: string, city: string, street?: string
         const response = await fetch(
             `https://viacep.com.br/ws/${state}/${city}/${
                 street
-                    ?.replace('Av', '')
-                    ?.replace('.', '')
+                    ?.split(' ').filter(item => item.length > 2)
+                    ?.join(' ')
                     ?.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
                     ?.trim()}/json` || ''
         )
