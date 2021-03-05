@@ -1,28 +1,64 @@
 import compiler from '@ampproject/rollup-plugin-closure-compiler'
 import dts from 'rollup-plugin-dts'
+import includePaths from 'rollup-plugin-includepaths'
+import resolve from 'rollup-plugin-node-resolve'
+import replace from 'rollup-plugin-replace'
 import typescript from '@rollup/plugin-typescript'
 
-import pkg from './package.json'
+const input = 'src/index.ts'
+const name = 'cep-address-finder'
+const format = 'cjs'
 
 const config = [
     {
-        input: 'src/lib/index.ts',
+        input,
         output: [
             {
-                file: pkg.main,
-                format: 'cjs',
+                file: `dist/${name}.js`,
+                format,
+                name,
+                exports: 'named'
             },
         ],
         plugins: [
             typescript(),
             compiler(),
         ],
+        external: ['node-fetch']
     },
     {
-        input: 'src/lib/index.ts',
-        output: [{ file: pkg.types, format: 'cjs' }],
-        plugins: [dts()],
+        input,
+        output: [
+            {
+                file: `dist/${name}-browser.js`,
+                format,
+                name,
+                exports: 'named'
+            },
+        ],
+        plugins: [
+            replace({
+              'node-fetch': 'unfetch',
+            }),
+            resolve({
+              browser: true
+            }),
+            typescript(),
+            compiler(),
+        ],
+        context: 'window',
+    },
+    {
+        input,
+        output: [{ file: `dist/${name}.d.ts`, format: 'cjs', name }],
+        plugins: [
+            dts(),
+            includePaths({
+                paths: ['src/lib', 'src/types'],
+                extensions: ['.js', '.ts']
+            }),
+        ],
     },
 ];
 
-export default config;
+export default config

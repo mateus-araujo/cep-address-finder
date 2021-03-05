@@ -1,4 +1,6 @@
-import { convertViaCEPAddress } from 'lib/helpers'
+import fetch from 'node-fetch'
+
+import { convertViaCEPAddress } from 'utils'
 
 /**
  * Retorna endereço a partir do CEP

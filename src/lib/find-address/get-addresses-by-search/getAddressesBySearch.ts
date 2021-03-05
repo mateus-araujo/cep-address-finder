@@ -1,5 +1,6 @@
-import { convertViaCEPAddress } from 'lib/helpers'
-import { ViaCEPAddress } from 'types'
+import fetch from 'node-fetch'
+
+import { convertViaCEPAddress } from 'utils'
 
 /**
  * Retorna lista de endereços a partir da pesquisa
@@ -29,7 +30,7 @@ async function getAddressesBySearch(state: string, city: string, street?: string
             throw new Error('Nenhum endereço encontrado')
         }
 
-        return data.map((address: ViaCEPAddress) => convertViaCEPAddress(address))
+        return data.map((address) => convertViaCEPAddress(address))
     } catch (error) {
         throw new Error('Erro na requisição ao ViaCEP')
     }
