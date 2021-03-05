@@ -3,11 +3,16 @@ import isNumberAtComplementPattern from './isNumberAtComplementPattern'
 
 function findAddressByNeighborhoodOrCity(addresses: Address[], neighborhood?: string, city?: string) {
     return neighborhood ? (
-        addresses.find(address => address.neighborhood === neighborhood) ||
-        addresses.find(address => address.neighborhood.includes(neighborhood))
+        addresses.find(address =>
+            address.neighborhood === neighborhood ||
+            address.neighborhood.includes(neighborhood) ||
+            neighborhood.includes(address.neighborhood)
+        )
     ) : city ? (
-        addresses.find(address => address.city === city) ||
-        addresses.find(address => address.city.includes(city))
+        addresses.find(address =>
+            address.city === city ||
+            address.city.includes(city) ||
+            city.includes(address.city))
     ) : undefined
 }
 
@@ -17,8 +22,11 @@ function selectAddressFromList(addresses: Address[], number?: string, neighborho
 } | undefined {
     try {
         const addressesList = neighborhood
-            ? addresses.filter(address => address.neighborhood === neighborhood || address.neighborhood.includes(neighborhood))
-            : addresses
+            ? addresses.filter(address =>
+                address.neighborhood === neighborhood ||
+                address.neighborhood.includes(neighborhood) ||
+                neighborhood.includes(address.neighborhood)
+            ) : addresses
 
         const selectedAddress = number
             /**
