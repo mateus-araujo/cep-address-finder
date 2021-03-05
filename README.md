@@ -10,31 +10,46 @@ Uma simples e poderosa biblioteca para pesquisa de endereços brasileiros.
 
 ✅ Utiliza base atualizada com requisições feitas a api ViaCEP
 
-✅ Zero dependências (utiliza `fetch` do próprio Javascript)
+✅ Leve, utiliza `node-fetch` no lado servidor e `unfetch` no lado cliente para fazer as requisições
 
 ✅ Suporte Typescript
 
 ✅ Tratamento de erros
 
 
+## Instalação
+
+#### npm
+
+```
+$ npm install --save cep-address-finder
+```
+
+#### yarn
+
+```
+$ yarn add cep-address-finder
+```
+
+
 ## Como utilizar
 
 ### Busca de CEP a partir de um endereço sem CEP
 
-Por ser multifornecedor, a biblioteca irá resolver a Promise com o fornecedor que **mais rápido** lhe responder.
-
 Com a função `findAddress` é possível retornar um endereço completo, apenas com algumas informações básicas, como `state`, `city`, `street` e `number`. Além de uma lista de endereços do logradouro, retornada pelo ViaCEP.
 
-Apenas `state` e `city` são obrigatórias, bem útil quando uma cidade tem apenas uma faixa de CEP. Ou apenas `state`, `city` e `neighborhood`, também útil para regiões que possuam poucas faixas de CEP.
+Apenas `state` e `city` são obrigatórias, bem útil quando uma cidade tem apenas uma faixa de CEP.
 
-Os parâmetros disponíveis são: `state`, `city`, `street`, `number`, e `neighborhood`.
+Ou apenas `state`, `city` e `neighborhood`, também útil para regiões que possuam poucas faixas de CEP.
+
+Os atributos disponíveis no objeto enviado como parâmetro são: `state`, `city`, `street`, `number`, e `neighborhood`.
 
 Quanto mais parâmetros melhor a precisão.
 
 ``` js
 import { findAddress } from 'cep-address-finder'
 
-// Colocar dentro de uma função assíncrona, ou usar `findAddress({...}).then(...)`
+// Colocar dentro de uma função assíncrona, ou usar findAddress({...}).then(...)
 const { addresses, selectedAddress } = await findAddress({
     state: 'CE',
     city: 'Fortaleza',
@@ -46,7 +61,7 @@ const { addresses, selectedAddress } = await findAddress({
 //
 // {
 //     "addresses": [...], // Lista com endereços do logradouro
-//     "selectedAddress": {
+//     "selectedAddress": { // Endereço selecionado da lista
 //         "cep": "60135-237",
 //         "state": "CE",
 //         "city": "Fortaleza",
@@ -61,16 +76,16 @@ const { addresses, selectedAddress } = await findAddress({
 // }
 ```
 
-No exemplo acima, foi encontrado o endereço com o CEP correspondente ao `"complement": "de 991 ao fim - lado ímpar"` e ao `number: '993'` que foi passado na função.
+No exemplo acima, foi encontrado o endereço com o CEP e complemento (`"complement": "de 991 ao fim - lado ímpar"`) correspondente ao número (`number: '993'`) que foi passado na função.
 
 ### Consulta de CEP
 
-Além da busca função acima, é possível realizar a consulta por um CEP.
+Além da busca da função acima, é possível realizar a consulta padrão por um CEP.
 
 ``` js
 import { getAddressByCEP } from 'cep-address-finder'
 
-// Colocar dentro de uma função assíncrona, ou usar `getAddressByCEP(...).then(...)`
+// Colocar dentro de uma função assíncrona, ou usar getAddressByCEP(...).then(...)
 const address = await getAddressByCEP('60160-110')
 
 // console.log({ address })
@@ -91,17 +106,15 @@ const address = await getAddressByCEP('60160-110')
 // }
 ```
 
-### Instalação
+## Como contribuir
 
-#### npm
+O projeto está livre para abertura de PRs e issues.
 
-```
-$ npm install --save cep-address-finder
-```
+Algumas **features** futuras:
 
-#### yarn
+    ✅ Suporte a NodeJS (implementado a partir da versão 1.3.0).
 
-```
-$ yarn add cep-address-finder
-```
-
+ * Integração a outros serviços de CEP, como Correios e WideNet.
+ * Testes automatizados.
+ * Instalação com Bower.
+ * Utilização no Browser usando CDN.
