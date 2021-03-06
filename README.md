@@ -1,4 +1,20 @@
-# CEP Address Finder
+<h1 align="center">CEP Address Finder</h1>
+
+<p align="center">
+  <a href="https://npm-stat.com/charts.html?package=cep-address-finder">
+    <img src="https://img.shields.io/npm/dm/cep-address-finder.svg">
+  </a>
+  <a href='https://coveralls.io/github/mateus-araujo/cep-address-finder?branch=main'><img src='https://coveralls.io/repos/github/mateus-araujo/cep-address-finder/badge.svg?branch=main' alt='Coverage Status' /></a>
+  <a href="https://www.npmjs.com/package/cep-address-finder">
+    <img src="https://badge.fury.io/js/cep-address-finder.svg">
+  </a>
+  <a href="http://standardjs.com/">
+    <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg">
+  </a>
+  <a href="https://snyk.io/test/github/mateus-araujo/cep-address-finder">
+    <img src="https://snyk.io/test/github/mateus-araujo/cep-address-finder/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/mateus-araujo/cep-address-finder" style="max-width:100%;">
+  </a>
+</p>
 
 Uma simples e poderosa biblioteca para pesquisa de endereços brasileiros.
 
