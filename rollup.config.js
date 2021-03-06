@@ -1,9 +1,9 @@
 import compiler from '@ampproject/rollup-plugin-closure-compiler'
+import typescript from '@rollup/plugin-typescript'
 import dts from 'rollup-plugin-dts'
 import includePaths from 'rollup-plugin-includepaths'
 import resolve from 'rollup-plugin-node-resolve'
 import replace from 'rollup-plugin-replace'
-import typescript from '@rollup/plugin-typescript'
 
 const input = 'src/index.ts'
 const name = 'cep-address-finder'
@@ -17,14 +17,11 @@ const config = [
                 file: `dist/${name}.js`,
                 format,
                 name,
-                exports: 'named'
+                exports: 'named',
             },
         ],
-        plugins: [
-            typescript(),
-            compiler(),
-        ],
-        external: ['node-fetch']
+        plugins: [typescript(), compiler()],
+        external: ['node-fetch'],
     },
     {
         input,
@@ -33,15 +30,15 @@ const config = [
                 file: `dist/${name}-browser.js`,
                 format,
                 name,
-                exports: 'named'
+                exports: 'named',
             },
         ],
         plugins: [
             replace({
-              'node-fetch': 'unfetch',
+                'node-fetch': 'unfetch',
             }),
             resolve({
-              browser: true
+                browser: true,
             }),
             typescript(),
             compiler(),
@@ -55,10 +52,10 @@ const config = [
             dts(),
             includePaths({
                 paths: ['src/lib', 'src/types'],
-                extensions: ['.js', '.ts']
+                extensions: ['.js', '.ts'],
             }),
         ],
     },
-];
+]
 
 export default config

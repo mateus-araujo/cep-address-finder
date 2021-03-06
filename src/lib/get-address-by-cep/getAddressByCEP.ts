@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 
+import { Address } from 'types'
 import { convertViaCEPAddress } from 'utils'
 
 /**
@@ -7,7 +8,7 @@ import { convertViaCEPAddress } from 'utils'
  *
  * @param {string} cep - CEP: Por exemplo: '60160-110' ou '60160110'
  */
-async function getAddressByCEP(cep: string) {
+async function getAddressByCEP(cep: string): Promise<Address> {
     const cepRawValue = cep?.toString().replace(/\D+/g, '')
 
     if (cepRawValue?.length !== 8) {
@@ -15,9 +16,7 @@ async function getAddressByCEP(cep: string) {
     }
 
     try {
-        const response = await fetch(
-            `https://viacep.com.br/ws/${cepRawValue}/json`
-        )
+        const response = await fetch(`https://viacep.com.br/ws/${cepRawValue}/json`)
 
         const data = await response.json()
 

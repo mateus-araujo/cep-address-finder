@@ -1,6 +1,6 @@
 const nonDigits = /\D/g
 
-function isNumberAtComplementPattern(complement: string, number: number) {
+function isNumberAtComplementPattern(complement: string, number: number): boolean {
     if (complement.match(/até \d*\/\d*/g)) {
         const [, max] = complement.replace('até ', '').split('/')
 

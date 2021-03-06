@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 
+import { Address } from 'types'
 import { convertViaCEPAddress } from 'utils'
 
 /**
@@ -9,19 +10,24 @@ import { convertViaCEPAddress } from 'utils'
  * @param {string} city - (Obrigatório) Cidade. Por exemplo: 'Fortaleza'.
  * @param {string} street - (Obrigatório) Logradouro. Por exemplo: 'Rua Ana Bilhar'.
  */
-async function getAddressesBySearch(state: string, city: string, street?: string) {
+async function getAddressesBySearch(state: string, city: string, street?: string): Promise<Address[]> {
     if (street && street?.length > 0 && street?.length < 3) {
         throw new Error('street deve conter pelo menos 3 caracteres.')
     }
 
     try {
+        const normalizeString = (value: string | undefined) =>
+            value
+                ?.normalize('NFD')
+                ?.replace(/([\u0300-\u036f]|[^0-9a-zA-Z\s])/g, '')
+                ?.split(' ')
+                ?.join(' ')
+                ?.trim() || ''
+
         const response = await fetch(
-            `https://viacep.com.br/ws/${state}/${city}/${
-                street
-                    ?.split(' ').filter(item => item.length > 2)
-                    ?.join(' ')
-                    ?.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                    ?.trim()}/json` || ''
+            `https://viacep.com.br/ws/${state}/${normalizeString(city)}/${normalizeString(
+                street?.replace('Av.', 'Avenida').replace('R.', 'Rua')
+            )}/json`
         )
 
         const data = await response.json()
@@ -30,7 +36,7 @@ async function getAddressesBySearch(state: string, city: string, street?: string
             throw new Error('Nenhum endereço encontrado')
         }
 
-        return data.map((address) => convertViaCEPAddress(address))
+        return data.map(address => convertViaCEPAddress(address))
     } catch (error) {
         throw new Error('Erro na requisição ao ViaCEP')
     }
