@@ -48,6 +48,7 @@ const config = [
     {
         input,
         output: [{ file: `dist/${name}.d.ts`, format: 'cjs', name }],
+        external: [/types/],
         plugins: [
             dts(),
             includePaths({

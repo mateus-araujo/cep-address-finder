@@ -1,6 +1,9 @@
-<h1 align="center">CEP Address Finder</h1>
+<h1 align="center">cep-address-finder</h1>
 
 <p align="center">
+  <a href="https://github.com/mateus-araujo/cep-address-finder/actions?workflow=CI">
+    <img src="https://github.com/mateus-araujo/cep-address-finder/workflows/CI/badge.svg">
+  </a>
   <a href="https://npm-stat.com/charts.html?package=cep-address-finder">
     <img src="https://img.shields.io/npm/dm/cep-address-finder.svg">
   </a>
@@ -129,8 +132,8 @@ O projeto está livre para abertura de PRs e issues.
 Algumas **features** futuras:
 
     ✅ Suporte a NodeJS (implementado a partir da versão 1.3.0).
+    ✅ Testes automatizados (implementados a partir da versão 1.3.3).
 
  * Integração a outros serviços de CEP, como Correios e WideNet.
- * Testes automatizados.
  * Instalação com Bower.
  * Utilização no Browser usando CDN.
