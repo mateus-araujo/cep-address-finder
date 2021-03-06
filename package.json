@@ -9,7 +9,8 @@
     "clean": "rm -rf dist",
     "build-package": "rollup --config",
     "build": "yarn clean && yarn build-package",
-    "test": "jest"
+    "test": "jest",
+    "test-coverage": "jest --coverage"
   },
   "files": [
     "dist"
