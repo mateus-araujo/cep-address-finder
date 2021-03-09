@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
 import { Address } from 'types'
-import { convertViaCEPAddress } from 'utils'
+import { convertViaCEPAddress, normalizeString } from 'utils'
 
 /**
  * Retorna lista de endereços a partir da pesquisa
@@ -16,14 +16,6 @@ async function getAddressesBySearch(state: string, city: string, street?: string
     }
 
     try {
-        const normalizeString = (value: string | undefined) =>
-            value
-                ?.normalize('NFD')
-                ?.replace(/([\u0300-\u036f]|[^0-9a-zA-Z\s])/g, '')
-                ?.split(' ')
-                ?.join(' ')
-                ?.trim() || ''
-
         const response = await fetch(
             `https://viacep.com.br/ws/${state}/${normalizeString(city)}/${normalizeString(
                 street?.replace('Av.', 'Avenida').replace('R.', 'Rua')

@@ -151,6 +151,29 @@ describe('find address should return an selected address', () => {
         })
     })
 
+    it('tests with: CE, Fortaleza, R. Osvaldo Cruz, 2133', async () => {
+        await expect(
+            findAddress({
+                state: 'CE',
+                city: 'Fortaleza',
+                street: 'R. Osvaldo Cruz',
+                number: '2133',
+                neighborhood: 'Estância (Dionísio Torres)',
+            })
+        ).resolves.toHaveProperty('selectedAddress', {
+            cep: '60125-151',
+            city: 'Fortaleza',
+            complement: 'de 2071/2072 a 3198/3199',
+            ddd: '85',
+            gia: '',
+            ibge: '2304400',
+            neighborhood: 'Dionisio Torres',
+            siafi: '1389',
+            state: 'CE',
+            street: 'Rua Osvaldo Cruz',
+        })
+    })
+
     it('tests with: CE, Fortaleza, R. Osvaldo Cruz, 3201', async () => {
         await expect(
             findAddress({

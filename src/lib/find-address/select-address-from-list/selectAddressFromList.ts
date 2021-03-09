@@ -1,17 +1,13 @@
 import { Address } from 'types'
+import { compareStrings } from 'utils'
 
 import isNumberAtComplementPattern from './isNumberAtComplementPattern'
 
 function findAddressByNeighborhoodOrCity(addresses: Address[], neighborhood?: string, city?: string) {
     return neighborhood
-        ? addresses.find(
-              address =>
-                  address.neighborhood === neighborhood ||
-                  address.neighborhood.includes(neighborhood) ||
-                  neighborhood.includes(address.neighborhood)
-          )
+        ? addresses.find(address => compareStrings(address.neighborhood, neighborhood))
         : city && addresses.some(address => address.city === city)
-        ? addresses.find(address => address.city === city)
+        ? addresses.find(address => compareStrings(address.city, city))
         : undefined
 }
 
@@ -25,12 +21,7 @@ function selectAddressFromList(
     selectedAddress: Address | undefined
 } {
     const addressesList = neighborhood
-        ? addresses.filter(
-              address =>
-                  address.neighborhood === neighborhood ||
-                  address.neighborhood.includes(neighborhood) ||
-                  neighborhood.includes(address.neighborhood)
-          )
+        ? addresses.filter(address => compareStrings(address.neighborhood, neighborhood))
         : addresses
 
     const selectedAddress = number
