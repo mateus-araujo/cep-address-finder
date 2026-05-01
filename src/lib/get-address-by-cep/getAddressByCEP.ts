@@ -25,8 +25,8 @@ async function getAddressByCEP(cep: string): Promise<Address> {
         }
 
         return convertViaCEPAddress(data)
-    } catch (error) {
-        if (error?.erro === true) {
+    } catch (error: unknown) {
+        if ((error as { erro?: boolean })?.erro === true) {
             throw new Error('CEP não encontrado')
         }
 

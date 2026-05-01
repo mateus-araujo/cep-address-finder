@@ -23,7 +23,7 @@ async function findAddress({
 }: {
     state: string
     city: string
-    street?: string
+    street: string
     number?: string
     neighborhood?: string
 }): Promise<{ addresses: Address[]; selectedAddress: Address | undefined }> {

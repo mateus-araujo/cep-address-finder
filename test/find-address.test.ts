@@ -55,7 +55,7 @@ describe('find address should return an selected address', () => {
             ddd: '85',
             gia: '',
             ibge: '2304400',
-            neighborhood: 'São João do Tauape',
+            neighborhood: 'Tauape',
             siafi: '1389',
             state: 'CE',
             street: 'Avenida Pontes Vieira',
@@ -71,16 +71,16 @@ describe('find address should return an selected address', () => {
                 number: '133',
             })
         ).resolves.toHaveProperty('selectedAddress', {
-            cep: '60130-973',
+            cep: '60130-235',
             city: 'Fortaleza',
-            complement: '',
+            "complement": "até 989 - lado ímpar",
             ddd: '85',
             gia: '',
             ibge: '2304400',
             neighborhood: 'Joaquim Távora',
             siafi: '1389',
             state: 'CE',
-            street: 'Avenida Pontes Vieira 133',
+            street: 'Avenida Pontes Vieira',
         })
     })
 
@@ -189,7 +189,7 @@ describe('find address should return an selected address', () => {
             ddd: '85',
             gia: '',
             ibge: '2304400',
-            neighborhood: 'São João do Tauape',
+            neighborhood: 'Tauape',
             siafi: '1389',
             state: 'CE',
             street: 'Rua Osvaldo Cruz',
@@ -246,26 +246,28 @@ describe('find address should return an selected address', () => {
             findAddress({
                 state: 'CE',
                 city: 'Aracati',
+                street: 'Avenida Coronel Alexanzito'
             })
         ).resolves.toHaveProperty('selectedAddress', {
-            cep: '62800-000',
+            cep: '62800-970',
             city: 'Aracati',
-            complement: '',
+            complement: '1192',
             ddd: '88',
             gia: '',
             ibge: '2301109',
-            neighborhood: '',
+            neighborhood: 'Centro',
             siafi: '1321',
             state: 'CE',
-            street: '',
+            street: 'Avenida Coronel Alexanzito',
         })
     })
 
-    it('tests with: CE, Bela Cruz', async () => {
+    it('tests with: CE, Bela Cruz, Rua São Vicente', async () => {
         await expect(
             findAddress({
                 state: 'CE',
                 city: 'Bela Cruz',
+                street: 'Rua São Vicente'
             })
         ).resolves.toHaveProperty('selectedAddress', {
             cep: '62570-000',
@@ -281,11 +283,12 @@ describe('find address should return an selected address', () => {
         })
     })
 
-    it('tests with: CE, Bela Cruz, Centro', async () => {
+    it('tests with: CE, Bela Cruz, Rua São Vicente, Centro', async () => {
         await expect(
             findAddress({
                 state: 'CE',
                 city: 'Bela Cruz',
+                street: 'Rua São Vicente',
                 neighborhood: 'Centro',
             })
         ).resolves.toHaveProperty('selectedAddress', {
