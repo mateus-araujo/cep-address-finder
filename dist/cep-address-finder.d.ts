@@ -1,15 +1,4 @@
-interface Address {
-    cep: string;
-    street: string;
-    complement: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-    ibge?: string;
-    gia?: string;
-    ddd?: string;
-    siafi?: string;
-}
+import { Address } from 'types';
 
 /**
  * Retorna Promise com a lista de endereços a partir da pesquisa e
@@ -22,10 +11,10 @@ interface Address {
  * @param {number} address.number - Número. Por exemplo: 987.
  * @param {string} address.neighborhood - Bairro. Por exemplo: 'Meireles'.
  */
-declare function findAddress({ state, city, street, number, neighborhood }: {
+declare function findAddress({ state, city, street, number, neighborhood, }: {
     state: string;
     city: string;
-    street?: string;
+    street: string;
     number?: string;
     neighborhood?: string;
 }): Promise<{
@@ -55,5 +44,4 @@ declare const _default: {
     getAddressesBySearch: typeof getAddressesBySearch;
 };
 
-export default _default;
-export { findAddress, getAddressByCEP, getAddressesBySearch };
+export { _default as default, findAddress, getAddressByCEP, getAddressesBySearch };

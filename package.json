@@ -1,6 +1,6 @@
 {
   "name": "cep-address-finder",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "description": "Uma simples e poderosa biblioteca para pesquisa de endereços brasileiros.",
   "type": "module",
   "main": "dist/cep-address-finder.js",

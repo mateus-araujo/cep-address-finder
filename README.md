@@ -11,8 +11,8 @@
   <a href="https://www.npmjs.com/package/cep-address-finder">
     <img src="https://badge.fury.io/js/cep-address-finder.svg">
   </a>
-  <a href="http://standardjs.com/">
-    <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg">
+  <a href="https://www.npmjs.com/package/cep-address-finder">
+    <img src="https://img.shields.io/npm/v/cep-address-finder.svg">
   </a>
   <a href="https://snyk.io/test/github/mateus-araujo/cep-address-finder">
     <img src="https://snyk.io/test/github/mateus-araujo/cep-address-finder/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/mateus-araujo/cep-address-finder" style="max-width:100%;">
@@ -129,10 +129,28 @@ const address = await getAddressByCEP('60160-110')
 
 O projeto está livre para abertura de PRs e issues.
 
+## Histórico de versões
+
+### v1.4.0
+
+- Atualização de todas as dependências para versões mais recentes (Jest 30, TypeScript 6, ESLint 10, Rollup 4)
+- Correção de configurações obsoletas no TypeScript (moduleResolution, target)
+- Substituição de plugins deprecated do Rollup e ESLint
+- Atualização dos testes para refletir mudanças na API do ViaCEP
+
+### v1.3.5
+
+- Geração de builds atualizados
+
+### v1.3.4
+
+- Correção na normalização de strings para melhorar comparação de bairros
+
 Algumas **features** futuras:
 
     ✅ Suporte a NodeJS (implementado a partir da versão 1.3.0).
     ✅ Testes automatizados (implementados a partir da versão 1.3.3).
+    ✅ Atualização de dependências e correção de código obsoleto (implementado a partir da versão 1.4.0).
 
  * Integração a outros serviços de CEP, como Correios e WideNet.
  * Instalação com Bower.
