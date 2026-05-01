@@ -1,16 +1,19 @@
 {
     "compilerOptions": {
-      "baseUrl": "./src",
+      "rootDir": "./src",
+      "paths": {
+        "*": ["./src/*"]
+      },
       "allowSyntheticDefaultImports": true,
       "declaration": true,
       "forceConsistentCasingInFileNames": true,
       "esModuleInterop": true,
       "module": "esnext",
-      "moduleResolution": "node",
+      "moduleResolution": "bundler",
       "outDir": "./dist",
       "skipLibCheck": true,
       "strict": true,
-      "target": "es5",
+      "target": "ES2015",
       "lib": [
         "dom",
         "dom.iterable",

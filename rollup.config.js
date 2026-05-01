@@ -2,8 +2,8 @@ import compiler from '@ampproject/rollup-plugin-closure-compiler'
 import typescript from '@rollup/plugin-typescript'
 import dts from 'rollup-plugin-dts'
 import includePaths from 'rollup-plugin-includepaths'
-import resolve from 'rollup-plugin-node-resolve'
-import replace from 'rollup-plugin-replace'
+import resolve from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
 
 const input = 'src/index.ts'
 const name = 'cep-address-finder'
@@ -36,6 +36,7 @@ const config = [
         plugins: [
             replace({
                 'node-fetch': 'unfetch',
+                preventAssignment: true,
             }),
             resolve({
                 browser: true,
