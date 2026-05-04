@@ -1,0 +1,8 @@
+# Default reviewer for all changes.
+*       @mateus-araujo
+
+# Anything touching CI, security, release pipeline.
+/.github/        @mateus-araujo
+SECURITY.md      @mateus-araujo
+package.json     @mateus-araujo
+yarn.lock        @mateus-araujo
